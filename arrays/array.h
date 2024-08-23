@@ -14,9 +14,11 @@ typedef struct {
     PRINT show;
     FIND getMax;
     FIND getMin;
+    FIND getSum;
     SWAP swap;
     MANIPULATION append;
-    MANIPULATION pop;
+    MANIPULATION popByValue;
+    MANIPULATION popByIdx;
 
 } Array;
 
@@ -30,6 +32,7 @@ static void fillArray(int [], int);
 typedef int (*FIND) (int [], int);
 int findMax(int [], int);
 int findMin(int [], int);
+int findSum(int [], int);
 
 typedef void(*COUNT) (int[], int);
 void countValues(int [], int);
@@ -39,6 +42,7 @@ void swap(int [], int, int, int);
 
 typedef int (*MANIPULATION) (Array*, int);
 int append(Array*, int);
-int pop(Array*, int);
+int popValue(Array*, int);
+int popIdx(Array*, int);
 
 #endif

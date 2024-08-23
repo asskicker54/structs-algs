@@ -36,7 +36,7 @@ static void fillArray(int a[], int length) {
     }
 }
 
-int max(int a[], int length) {
+int findMax(int a[], int length) {
     int maxValue = -1 * (INT_MAX - 1);
     for (int i = 0; i < length; i++) {
         if (a[i] > maxValue) {
@@ -47,7 +47,7 @@ int max(int a[], int length) {
     return maxValue;
 }
 
-int min(int a[], int length) {
+int findMin(int a[], int length) {
     int minValue = -1 * (INT_MIN + 1);
     for (int i = 0; i < length; i++) {
         if (a[i] < minValue) {
@@ -58,7 +58,7 @@ int min(int a[], int length) {
     return minValue;
 }
 
-int sum(int a[], int length) {
+int findSum(int a[], int length) {
     int sum = 0;
     for (int i = 0; i < length; i++) {
         sum += a[i];
@@ -67,6 +67,22 @@ int sum(int a[], int length) {
     return sum;
 }
 
-void swap(int a[], int length, int x, int y) {
+void countValues(int a[], int length) {
+    // TODO: realize countValue function
+}
 
+void swap(int a[], int length, int x, int y) {
+    // TODO: realize swap function
+}
+
+int append(Array* array, int x) {
+    // TODO: relize append method
+}
+
+int popValue(Array* array, int x) {
+    // TODO: realize popValue function
+}
+
+int popIdx(Array* array, int idx) {
+    // TODO: realize popIdx function
 }
