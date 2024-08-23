@@ -10,12 +10,10 @@ int main() {
     printf("Array length: ");
     scanf("%d", &arrayLength);
 
-    int array[arrayLength];
-    fillArray(array, arrayLength);
-    printArray(array, arrayLength);
+    Array arr = NewArray(arrayLength);
+    arr.show(&arr);
 
-    printf("MAX: %d\n", max(array, arrayLength));
-    printf("MIN: %d\n", min(array, arrayLength));
+    destructArray(&arr);
 
     return 0;
 }

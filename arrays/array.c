@@ -2,29 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+#include <stddef.h>
 
 #include "array.h"
 
-Array NewArray(int length) {
-    int data[length];
-    fillArray(data, length);
-
-    int maxV = max(data, length);
-    int minV = min(data, length);
-
-    Array array = {
-        .length = length,
-        .data=data,
-        .max=maxV,
-        .min=minV,
-        .sum=sum(data, length)
-    };
-}
-
-void printArray(int a[], int length) {
+void printArray(struct _array* this) {
     printf("[ ");
-    for (int i = 0; i < length; i++) {
-        printf("%d ", a[i]);
+    for (int i = 0; i < this->length; i++) {
+        printf("%d ", this->data[i]);
     }
     printf("]\n");
 }
@@ -36,53 +21,86 @@ static void fillArray(int a[], int length) {
     }
 }
 
-int findMax(int a[], int length) {
-    int maxValue = -1 * (INT_MAX - 1);
-    for (int i = 0; i < length; i++) {
-        if (a[i] > maxValue) {
-            maxValue = a[i];
-        }
-    }
+// int findMax(int a[], int length) {
+//     int maxValue = -1 * (INT_MAX - 1);
+//     for (int i = 0; i < length; i++) {
+//         if (a[i] > maxValue) {
+//             maxValue = a[i];
+//         }
+//     }
 
-    return maxValue;
+//     return maxValue;
+// }
+
+// int findMin(int a[], int length) {
+//     int minValue = -1 * (INT_MIN + 1);
+//     for (int i = 0; i < length; i++) {
+//         if (a[i] < minValue) {
+//             minValue = a[i];
+//         }
+//     }
+
+//     return minValue;
+// }
+
+// int findSum(int a[], int length) {
+//     int sum = 0;
+//     for (int i = 0; i < length; i++) {
+//         sum += a[i];
+//     }
+
+//     return sum;
+// }
+
+// void countValues(int a[], int length) {
+//     // TODO: realize countValue function
+// }
+
+// void swap(int a[], int length, int x, int y) {
+//     // TODO: realize swap function
+// }
+
+// static void append(Array* arr, int x) {
+//     // TODO: relize append method
+//     int newData [arr->length + 1];
+//     for (int i = 0; i < arr->length; i++) {
+//         newData[i] = arr->data[i];
+//     }
+//     newData[arr->length] = x;
+//     arr->data = newData;
+
+// }
+
+// static void popValue(Array* arr, int x) {
+//     // TODO: realize popValue function
+// }
+
+// static void popIdx(Array* arr, int idx) {
+//     // TODO: realize popIdx function
+// }
+
+Array NewArray(int length) {
+    int* data = malloc(length * sizeof(int));
+    fillArray(data, length);
+
+    Array arr = {
+        .length = length,
+        .data=data,
+        .show=printArray,
+        // .getMax=findMax,
+        // .getMin=findMin,
+        // .getSum=findSum,
+        // .countElements=countValues,
+        // .swap=swap,
+        // .append=append,
+        // .popByValue=popValue,
+        // .popByIdx=popIdx
+    };
+
+    return arr;
 }
 
-int findMin(int a[], int length) {
-    int minValue = -1 * (INT_MIN + 1);
-    for (int i = 0; i < length; i++) {
-        if (a[i] < minValue) {
-            minValue = a[i];
-        }
-    }
-
-    return minValue;
-}
-
-int findSum(int a[], int length) {
-    int sum = 0;
-    for (int i = 0; i < length; i++) {
-        sum += a[i];
-    }
-
-    return sum;
-}
-
-void countValues(int a[], int length) {
-    // TODO: realize countValue function
-}
-
-void swap(int a[], int length, int x, int y) {
-    // TODO: realize swap function
-}
-
-int append(Array* array, int x) {
-    // TODO: relize append method
-}
-
-int popValue(Array* array, int x) {
-    // TODO: realize popValue function
-}
-
-int popIdx(Array* array, int idx) {
-    // TODO: realize popIdx function
+void destructArray(struct _array* array) {
+    free(array->data);
+    array->data = NULL;
 }
