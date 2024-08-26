@@ -7,6 +7,8 @@ typedef void (*MethodChange_t)(void*, int, int);
 typedef void (*MethodAddDelete_t)(void*, int);
 typedef int (*MethodFind_t)(void*, int);
 
+// TODO: copy method
+
 typedef struct Vector{
     int* m_data;
     int m_length;
