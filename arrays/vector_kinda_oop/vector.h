@@ -4,7 +4,8 @@
 typedef void (*Method_t)(void*);
 typedef int (*MethodGet_t)(void*);
 typedef void (*MethodChange_t)(void*, int, int);
-typedef void (*MethodAppend_t)(void*, int);
+typedef void (*MethodAddDelete_t)(void*, int);
+typedef int (*MethodFind_t)(void*, int);
 
 typedef struct Vector{
     int* m_data;
@@ -15,8 +16,10 @@ typedef struct Vector{
     MethodGet_t max;
     MethodGet_t min;
     MethodChange_t swap;
-    MethodAppend_t append;
+    MethodAddDelete_t append;
     MethodChange_t push;
+    MethodFind_t getIdxByValue;
+    MethodAddDelete_t popByIdx;
 }vector_t;
 
 vector_t* NewVector(int);
@@ -36,5 +39,10 @@ void doSwap(vector_t*, int, int);
 void doAppend(vector_t*, int);
 
 void doPush(vector_t*, int, int);
+
+int findIdx(vector_t*, int);
+
+// void doPopByValue(vector_t*, int);
+void doPopByIdx(vector_t*, int);
 
 #endif

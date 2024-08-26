@@ -16,6 +16,8 @@ vector_t* NewVector(int length) {
     vector->swap = doSwap;
     vector->append = doAppend; 
     vector->push = doPush;
+    vector->getIdxByValue = findIdx;
+    vector->popByIdx =doPopByIdx;
     generateData(vector);
 
     return vector;
@@ -86,23 +88,56 @@ void doAppend(vector_t* this, int newValue) {
 }
 
 void doPush(vector_t* this, int newValue, int idx) {
+    if (idx >= 0 && idx <= (this->m_length)) {
+        if (idx == this->m_length) {
+            this->append(this, newValue);
+        } else {
+
+            int* newData = malloc((this->m_length + 1) * sizeof(int));
+            for (int i = 0; i < this->m_length + 1; i++) {
+                if (i < idx) {
+                    newData[i] = this->m_data[i];
+                } else if (i == idx) {
+                    newData[idx] = newValue;
+                } else {
+                    newData[i] = this->m_data[i - 1];
+                }
+            }
+            free(this->m_data);
+            this->m_data = newData;
+            this->m_length += 1;
+        }
+    } else {
+        printf("Failed to push the element: %d to index: %d. Index is not valid!\n", newValue, idx);
+    }
+}
+
+int findIdx(vector_t* this, int value) {
+    int idx = -1;
+    for (int i = 0; i < this->m_length; i++) {
+        if (this->m_data[i] == value) {
+            idx = i;
+            break;
+        }
+    }
+    return idx;
+}
+
+void doPopByIdx(vector_t* this, int idx) {
     if (idx >= 0 && idx <= (this->m_length - 1)) {
-        int* newData = malloc((this->m_length + 1) * sizeof(int));
-        for (int i = 0; i < this->m_length + 1; i++) {
+        int* newData = malloc((this->m_length - 1) * sizeof(int));
+        for (int i = 0; i < this->m_length; i++) {
             if (i < idx) {
                 newData[i] = this->m_data[i];
-            } else if (i == idx) {
-                newData[idx] = newValue;
-            } else {
-                newData[i] = this->m_data[i - 1];
+            } else if (i > idx) {
+                newData[i - 1] = this->m_data[i];
             }
         }
         free(this->m_data);
         this->m_data = newData;
-        this->m_length += 1;
+        this->m_length -= 1;
     } else {
-        printf("Failed to push the element: %d to index: %d. Index is not valid!", newValue, idx);
+        printf("Failed to pop the element with index: %d. Index is not valid.", idx);
     }
 }
-
 
