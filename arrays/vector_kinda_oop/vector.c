@@ -15,6 +15,7 @@ vector_t* NewVector(int length) {
     vector->min = findMin;
     vector->swap = doSwap;
     vector->append = doAppend; 
+    vector->push = doPush;
     generateData(vector);
 
     return vector;
@@ -22,10 +23,10 @@ vector_t* NewVector(int length) {
 
 void DestructVector(vector_t* vector) {
     free(vector->m_data);
-    // vector->m_data = NULL;
+    vector->m_data = NULL;
 
     free(vector);
-    // vector = NULL;
+    vector = NULL;
 }
 
 static void generateData(vector_t* vector) {
@@ -79,8 +80,29 @@ void doSwap(vector_t* this, int idx1, int idx2) {
 }
 
 void doAppend(vector_t* this, int newValue) {
-    this->m_data = realloc(this->m_data,  ((this->m_length + 1) * sizeof(int)));
+    this->m_data = realloc(this->m_data, ((this->m_length + 1) * sizeof(int)));
     this->m_data[this->m_length] = newValue;
     this->m_length += 1;
 }
+
+void doPush(vector_t* this, int newValue, int idx) {
+    if (idx >= 0 && idx <= (this->m_length - 1)) {
+        int* newData = malloc((this->m_length + 1) * sizeof(int));
+        for (int i = 0; i < this->m_length + 1; i++) {
+            if (i < idx) {
+                newData[i] = this->m_data[i];
+            } else if (i == idx) {
+                newData[idx] = newValue;
+            } else {
+                newData[i] = this->m_data[i - 1];
+            }
+        }
+        free(this->m_data);
+        this->m_data = newData;
+        this->m_length += 1;
+    } else {
+        printf("Failed to push the element: %d to index: %d. Index is not valid!", newValue, idx);
+    }
+}
+
 
