@@ -17,7 +17,8 @@ vector_t* NewVector(int length) {
     vector->append = doAppend; 
     vector->push = doPush;
     vector->getIdxByValue = findIdx;
-    vector->popByIdx =doPopByIdx;
+    vector->popByIdx = doPopByIdx;
+    vector->popByValue = doPopByValue;
     generateData(vector);
 
     return vector;
@@ -141,3 +142,11 @@ void doPopByIdx(vector_t* this, int idx) {
     }
 }
 
+void doPopByValue(vector_t* this, int value) {
+    int idx = this->getIdxByValue(this, value);
+    if (idx == -1) {
+        printf("No such value in vector to pop\n");
+    } else {
+        this->popByIdx(this, idx);
+    }
+}

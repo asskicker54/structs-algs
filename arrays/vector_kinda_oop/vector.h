@@ -20,6 +20,7 @@ typedef struct Vector{
     MethodChange_t push;
     MethodFind_t getIdxByValue;
     MethodAddDelete_t popByIdx;
+    MethodAddDelete_t popByValue;
 }vector_t;
 
 vector_t* NewVector(int);
@@ -42,7 +43,7 @@ void doPush(vector_t*, int, int);
 
 int findIdx(vector_t*, int);
 
-// void doPopByValue(vector_t*, int);
+void doPopByValue(vector_t*, int);
 void doPopByIdx(vector_t*, int);
 
 #endif
