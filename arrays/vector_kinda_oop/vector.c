@@ -13,6 +13,7 @@ vector_t* NewVector(int length) {
     vector->getLen = getLength;
     vector->max = findMax;
     vector->min = findMin;
+    vector->swap = doSwap;
     generateData(vector);
 
     return vector;
@@ -20,10 +21,10 @@ vector_t* NewVector(int length) {
 
 void DestructVector(vector_t* vector) {
     free(vector->m_data);
-    vector->m_data = NULL;
+    // vector->m_data = NULL;
 
     free(vector);
-    vector = NULL;
+    // vector = NULL;
 }
 
 static void generateData(vector_t* vector) {
@@ -63,4 +64,15 @@ int findMin(vector_t* this) {
             }
         }
         return minVal;
+}
+
+void doSwap(vector_t* this, int idx1, int idx2) {
+    if ((idx1 >= 0 && idx2 >= 0) && (idx1 <= this->m_length - 1 && idx2 <= this->m_length - 1)) {
+        int temp;
+        temp = this->m_data[idx1];
+        this->m_data[idx1] = this->m_data[idx2];
+        this->m_data[idx2] = temp;
+    } else {
+        printf("Failed to swap elements: index is not valid!\n");
+    }
 }
