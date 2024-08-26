@@ -15,6 +15,7 @@ typedef struct Vector{
     MethodGet_t max;
     MethodGet_t min;
     MethodSwap_t swap;
+    MethodChange_t append;
 }vector_t;
 
 vector_t* NewVector(int);
@@ -30,5 +31,7 @@ int findMax(vector_t*);
 int findMin(vector_t*);
 
 void doSwap(vector_t*, int, int);
+
+void doAppend(vector_t*, int);
 
 #endif

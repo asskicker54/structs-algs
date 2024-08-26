@@ -14,6 +14,7 @@ vector_t* NewVector(int length) {
     vector->max = findMax;
     vector->min = findMin;
     vector->swap = doSwap;
+    vector->append = doAppend; 
     generateData(vector);
 
     return vector;
@@ -76,3 +77,10 @@ void doSwap(vector_t* this, int idx1, int idx2) {
         printf("Failed to swap elements: index is not valid!\n");
     }
 }
+
+void doAppend(vector_t* this, int newValue) {
+    this->m_data = realloc(this->m_data,  ((this->m_length + 1) * sizeof(int)));
+    this->m_data[this->m_length] = newValue;
+    this->m_length += 1;
+}
+
