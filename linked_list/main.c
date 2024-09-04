@@ -6,6 +6,6 @@ int main(void) {
   AppendNode(list, 30);
   PrintList(list);
   DestructList(list);
-
+  // test
   return 0;
 }
