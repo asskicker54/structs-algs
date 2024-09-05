@@ -41,6 +41,8 @@ void DestructList(list_t *list) {
   list = NULL;
 }
 
+node_t *GetHead(list_t *list) { return list->head; }
+
 int IsListEmpty(list_t *list) {
   if (list->length == 0 && list->head == NULL) {
     return 1;
@@ -50,13 +52,18 @@ int IsListEmpty(list_t *list) {
 }
 
 void AppendNode(list_t *list, int data) {
-  node_t *newNode = NewNode(data);
-  node_t *currentNode = list->head;
-  while (currentNode->next) {
-    currentNode = currentNode->next;
+  if (list->length == 0) {
+    list->head = NewNode(data);
+    list->length++;
+  } else {
+    node_t *newNode = NewNode(data);
+    node_t *currentNode = list->head;
+    while (currentNode->next) {
+      currentNode = currentNode->next;
+    }
+    currentNode->next = newNode;
+    list->length++;
   }
-  currentNode->next = newNode;
-  list->length++;
 }
 
 void PrintList(list_t *list) {
