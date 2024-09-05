@@ -11,6 +11,7 @@ typedef struct LinkedList {
 } list_t;
 
 node_t *NewNode(int data);
+void DestructNode(node_t *node);
 
 list_t *NewList(int data);
 void DestructList(list_t *list);
@@ -19,3 +20,8 @@ int IsListEmpty(list_t *list);
 void AppendNode(list_t *list, int data);
 
 void PrintList(list_t *list);
+
+void DeleteFirst(list_t *list);
+void DeleteLast(list_t *list);
+
+void DeleteListElement(list_t *list, int idx);
